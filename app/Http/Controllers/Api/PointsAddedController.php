@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\PharmacyController;
 use App\Http\Controllers\Api\CustomerController;
+use Illuminate\Support\Facades\Validator;
 
 class PointsAddedController extends Controller
 {
@@ -16,8 +17,26 @@ class PointsAddedController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, int $pharm_id, int $client_id, int $points)
+    public function store(Request $request, $pharm_id, $client_id, $points)
     {
+        $dataToValidate = [
+            'pharm_id' => $pharm_id,
+            'client_id' => $client_id,
+            'points' => $points
+        ];
+
+        $validator = Validator::make($dataToValidate, [
+            'pharm_id' => 'required|integer',
+            'client_id' => 'required|integer',
+            'points' => 'required|integer'
+        ]);
+
+        if($validator->fails()){
+            return json_encode([
+                "Error" => "Something's wrong. Look if all of the parameters given are int"
+            ]);
+        }
+
         $this->check($client_id, $pharm_id);
 
         $pa = PointsAdded::create([

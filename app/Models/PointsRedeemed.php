@@ -9,6 +9,8 @@ class PointsRedeemed extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['customer_id', 'pharmacy_id', 'points_added_id', 'points', 'day_redeemed'];
+
     public function customers(){
         return $this->belongsTo(Customer::class);
     }

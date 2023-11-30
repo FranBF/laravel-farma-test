@@ -26,4 +26,4 @@ Route::post('/add-points/{pharm_id}/{client_id}/{points}', [PointsAddedControlle
 Route::get('/get-date-points/{pharmacy_id}/{date}', [PointsController::class, 'getPointsByDate']);
 Route::get('/get-client-points/{pharmacy_id}/{client_id}', [PointsController::class, 'returnPharmPointsToClientToApi']);
 Route::get('/get-all-client-points/{client_id}', [PointsController::class, 'getAllClientPoints']);
-Route::get('/redeem/{customer_id}/{pharm_id}/{pointsToRedeem}', [PointsRedeemedcontroller::class, 'store']);
+Route::post('/redeem/{customer_id}/{pharm_id}/{pointsToRedeem}', [PointsRedeemedcontroller::class, 'store']);
