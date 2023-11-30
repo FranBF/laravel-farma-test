@@ -26,4 +26,6 @@ class PointsAddedTest extends TestCase
 
         $this->assertTrue(true);
     }
+
+    
 }
